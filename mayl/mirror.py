@@ -1,5 +1,21 @@
 #!/usr/bin/env python
 
+# This program is free software; you can redistribute it and/or modify 
+# it under the terms of the GNU General Public License as published by 
+# the Free Software Foundation; version 2 of the License.
+#
+# This program is distributed in the hope that it will be useful, 
+# but WITHOUT ANY WARRANTY; without even the implied warranty of 
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+# GNU General Public License for more details. 
+
+# You should have received a copy of the GNU General Public License 
+# along with this program; if not, write to the Free Software 
+# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+#
+# @author Victor Shnayder (shnayder seas.harvard.edu)
+
+
 from optparse import OptionParser
 import datetime
 from urlparse import urlparse
@@ -99,7 +115,7 @@ def do_path_magic(opt, log):
 
 
 
-def main(args):
+def main(argv):
     parser = OptionParser(usage)
     parser.add_option("--log", dest="log_path",
                       help="log output to FILE", metavar="FILE")
@@ -113,7 +129,7 @@ def main(args):
     parser.add_option("--skip", dest="skip", action="store_true",
                       help="skip the wget", default=False)
     
-    (opt, args) = parser.parse_args()
+    (opt, args) = parser.parse_args(argv)
     if len(args) != 2:
         parser.error("expecting exactly two arguments")
         
@@ -141,4 +157,4 @@ def main(args):
             os.rename(file_path, opt.mirror_dir + '/' + 'index.html')
         
 if __name__=='__main__':
-    main(sys.argv)
+    main(sys.argv[1:])
